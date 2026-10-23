@@ -1,0 +1,21 @@
+{
+  "bytes" : 350649,
+  "files" : 23,
+  "license" : "MIT",
+  "licenseFetched" : true,
+  "mapCandidates" : [
+    "learning_rate=1e-4→learning_rate",
+    "learning_rate=3e-5→learning_rate",
+    "learning_rate=1e-3→learning_rate",
+    "learning_rate=6e-4→learning_rate"
+  ],
+  "project" : "nanoGPT",
+  "recipeFound" : false,
+  "seconds" : 2.6127519607543945,
+  "skipped" : [
+    ".gitattributes (hidden)",
+    "assets\/gpt2_124M_loss.png (file type not allowed)",
+    "assets\/nanogpt.jpg (file type not allowed)"
+  ],
+  "url" : "https:\/\/github.com\/karpathy\/nanoGPT"
+}

@@ -1,0 +1,40 @@
+{
+  "accuracy" : 0.96666666666666667,
+  "classes" : [
+    "Iris-setosa",
+    "Iris-versicolor",
+    "Iris-virginica"
+  ],
+  "columns" : [
+    "Id",
+    "SepalLengthCm",
+    "SepalWidthCm",
+    "PetalLengthCm",
+    "PetalWidthCm",
+    "Species"
+  ],
+  "cpuReferenceAccuracy" : 0.96666666666666667,
+  "features" : [
+    "SepalLengthCm",
+    "SepalWidthCm",
+    "PetalLengthCm",
+    "PetalWidthCm"
+  ],
+  "file" : "Iris.csv",
+  "flaggedSteps" : 0,
+  "label" : "Species",
+  "log" : [
+    "第 180\/200 步  損失: 0.147  驗證損失: 0.107  驗證準確率: 96.7%",
+    "第 190\/200 步  損失: 0.140  驗證損失: 0.101  驗證準確率: 96.7%",
+    "第 200\/200 步  損失: 0.134  驗證損失: 0.095  驗證準確率: 96.7%",
+    "驗證：透過",
+    "測試準確率：96.7%（30 行模型沒見過的資料）",
+    "✓ 已校驗"
+  ],
+  "project" : "iris 2",
+  "repo" : "scikit-learn\/iris",
+  "rows" : 150,
+  "seconds" : 2.9529320001602173,
+  "steps" : 200,
+  "trainSeconds" : 0.733909010887146
+}

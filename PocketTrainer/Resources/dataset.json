@@ -1,0 +1,9 @@
+{
+ "name": "cifar10-features-v1",
+ "files": {
+  "train_x.f16": "9aeaa9957903b8486f6361b71e512d1f4be5603e7db018334fa8b781a102154c",
+  "train_y.u8": "41b7b0a9d94690a3a2f54a1d01a9f1cc1b9512e3954fb737ad5ed9f66972403d",
+  "test_x.f16": "20a70de1e79da80f2d1520e9a9fb6a360cf8b4e0212a21976235cb337599f2ed",
+  "test_y.u8": "783ded2cd634604d77909249bf721cf46185a8401e95753ab3636fc8edcb816c"
+ }
+}

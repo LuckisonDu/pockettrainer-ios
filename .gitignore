@@ -1,0 +1,5 @@
+# 白名单式坑：不要用 "*" 再排除；这里只忽略编译产物
+build*/
+*.xcodeproj/
+.DS_Store
+__pycache__/

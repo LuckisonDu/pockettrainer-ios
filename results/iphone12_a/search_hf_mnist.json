@@ -1,0 +1,13 @@
+{
+  "count" : 20,
+  "first" : [
+    "tanganke\/clip-vit-base-patch32_mnist [no license] stars=-1 downloads=19256",
+    "tanganke\/clip-vit-large-patch14_mnist [no license] stars=-1 downloads=13227",
+    "tanganke\/clip-vit-base-patch16_mnist [no license] stars=-1 downloads=11248",
+    "asnelt\/mnistvit-transformers [mit] stars=-1 downloads=2953",
+    "gaurangdave\/mnist_cnn [no license] stars=-1 downloads=2661"
+  ],
+  "q" : "mnist",
+  "seconds" : 0.17336201667785645,
+  "source" : "hf"
+}

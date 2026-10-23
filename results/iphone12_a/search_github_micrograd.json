@@ -1,0 +1,13 @@
+{
+  "count" : 20,
+  "first" : [
+    "tinygrad\/tinygrad [MIT] stars=33779 downloads=-1",
+    "mlecauchois\/micrograd-cuda [MIT] stars=252 downloads=-1",
+    "automata\/mojograd [no license] stars=79 downloads=-1",
+    "kibotu\/karpathy-microgpt [no license] stars=58 downloads=-1",
+    "noway\/yagrad [MIT] stars=26 downloads=-1"
+  ],
+  "q" : "micrograd",
+  "seconds" : 0.92325806617736816,
+  "source" : "github"
+}

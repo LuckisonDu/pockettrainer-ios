@@ -1,0 +1,38 @@
+{
+  "candidates" : [
+    "Resnet50Int8LUT.mlmodel 25677037",
+    "Resnet50FP16.mlmodel 51313342",
+    "Resnet50Headless.mlmodel 94367931",
+    "Resnet50.mlmodel 102586812"
+  ],
+  "cosine" : 0.99999792833405765,
+  "cpuSeconds" : 0.060798048973083496,
+  "cpuTop5" : [
+    "web site, website, internet site, site 0.3545",
+    "ping-pong ball 0.2883",
+    "envelope 0.2166",
+    "golf ball 0.0108",
+    "guillotine 0.0077"
+  ],
+  "description" : [
+    "in  image: image 224×224",
+    "out classLabel: text",
+    "out classLabelProbs: dictionary (label → probability)"
+  ],
+  "downloadBytes" : 25677037,
+  "gpuSeconds" : 0.80692005157470703,
+  "maxDiff" : 0.00086298584938049316,
+  "model" : "Resnet50Int8LUT.mlmodel",
+  "prepareSeconds" : 1.7274199724197388,
+  "project" : "coreml-resnet-50 3",
+  "repo" : "apple\/coreml-resnet-50",
+  "seconds" : 5.756600022315979,
+  "top5" : [
+    "web site, website, internet site, site 0.3549",
+    "ping-pong ball 0.2874",
+    "envelope 0.2169",
+    "golf ball 0.0107",
+    "guillotine 0.0077"
+  ],
+  "verified" : true
+}

@@ -1,0 +1,18 @@
+{
+  "bytes" : 71124,
+  "files" : 10,
+  "license" : "MIT",
+  "licenseFetched" : true,
+  "mapCandidates" : [
+
+  ],
+  "project" : "micrograd",
+  "recipeFound" : false,
+  "seconds" : 1.5651839971542358,
+  "skipped" : [
+    "gout.svg (file type not allowed)",
+    "moon_mlp.png (file type not allowed)",
+    "puppy.jpg (file type not allowed)"
+  ],
+  "url" : "https:\/\/github.com\/karpathy\/micrograd"
+}

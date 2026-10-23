@@ -1,0 +1,45 @@
+{
+  "candidates" : [
+    "Resnet50Int8LUT.mlmodel 25677037",
+    "Resnet50FP16.mlmodel 51313342",
+    "Resnet50Headless.mlmodel 94367931",
+    "Resnet50.mlmodel 102586812"
+  ],
+  "cosine" : 0.99999875455431675,
+  "cpuSeconds" : 0.03314507007598877,
+  "cpuTop5" : [
+    "#249 12.2796",
+    "#395 10.6689",
+    "#981 6.8152",
+    "#836 6.7957",
+    "#2008 5.5825"
+  ],
+  "description" : [
+    "in  image: image 224×224",
+    "out averagePoolingOutput: array [2048, 1, 1]"
+  ],
+  "downloadBytes" : 94367931,
+  "gpuSeconds" : 1.0760310888290405,
+  "maxDiff" : 0.010573863983154297,
+  "model" : "Resnet50Headless.mlmodel",
+  "prepareSeconds" : 3.3876149654388428,
+  "project" : "coreml-resnet-50 4",
+  "repo" : "apple\/coreml-resnet-50",
+  "seconds" : 10.109219074249268,
+  "teachSelfTestWithThisModel" : {
+    "featureDim" : 2048,
+    "modelLoaded" : true,
+    "seconds" : 0.6840670108795166,
+    "test" : 15,
+    "testCorrect" : 15,
+    "train" : 45
+  },
+  "top5" : [
+    "#249 12.2734",
+    "#395 10.6641",
+    "#981 6.8242",
+    "#836 6.7852",
+    "#2008 5.5859"
+  ],
+  "verified" : true
+}

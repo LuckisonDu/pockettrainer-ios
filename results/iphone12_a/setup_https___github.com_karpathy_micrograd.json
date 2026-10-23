@@ -1,0 +1,47 @@
+{
+  "bytes" : 71124,
+  "coremlFound" : false,
+  "files" : 10,
+  "license" : "MIT",
+  "log" : [
+    "19:29:18  正在向 GitHub 查詢 karpathy\/micrograd…",
+    "19:29:18  找到 10 個文字檔案和 0 個模型\/資料檔案（許可證：MIT）",
+    "19:29:19  在依賴檔案和 import 裡找到 2 個軟體包",
+    "19:29:19  setuptools : iOS 上不可用 — PocketTrainer 不執行 Python 程式碼",
+    "19:29:19  torch : iOS 上不可用 — 需要 iOS 應用無法下載的原生程式碼",
+    "19:29:19  正在下載 1\/10：.gitignore",
+    "19:29:19  正在下載 2\/10：LICENSE",
+    "19:29:20  正在下載 3\/10：README.md",
+    "19:29:20  正在下載 4\/10：demo.ipynb",
+    "19:29:20  正在下載 5\/10：setup.py",
+    "19:29:20  正在下載 6\/10：trace_graph.ipynb",
+    "19:29:20  正在下載 7\/10：__init__.py",
+    "19:29:20  正在下載 8\/10：engine.py",
+    "19:29:20  正在下載 9\/10：nn.py",
+    "19:29:20  正在下載 10\/10：test_engine.py",
+    "19:29:20  已把 10 個檔案（69.5 KB）存進專案“micrograd 2”",
+    "19:29:20  匯入時跳過了 3 個檔案（不是純文字、太大或不允許）。",
+    "19:29:20  只能閱讀和修改——PocketTrainer 用內建訓練器執行“配方”（不是完整的 Python 或 PyTorch）。",
+    "19:29:20  ✓ 專案已就緒 — Missing: setuptools, torch"
+  ],
+  "packages" : [
+    "setuptools  → Not available on iOS",
+    "torch  → Not available on iOS"
+  ],
+  "passed" : true,
+  "project" : "micrograd 2",
+  "recipe" : "none",
+  "report" : "Missing: setuptools, torch",
+  "seconds" : 2.714972972869873,
+  "skipped" : [
+    "gout.svg (file type not allowed)",
+    "moon_mlp.png (file type not allowed)",
+    "puppy.jpg (file type not allowed)"
+  ],
+  "status" : "Missing: setuptools, torch",
+  "tablesFound" : false,
+  "url" : "https:\/\/github.com\/karpathy\/micrograd",
+  "weightsListed" : [
+
+  ]
+}

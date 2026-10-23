@@ -1,0 +1,16 @@
+{
+  "bytes" : 7082,
+  "files" : 4,
+  "license" : "BSD-3-Clause",
+  "licenseFetched" : true,
+  "mapCandidates" : [
+
+  ],
+  "project" : "examples-mnist",
+  "recipeFound" : false,
+  "seconds" : 0.78993093967437744,
+  "skipped" : [
+
+  ],
+  "url" : "https:\/\/github.com\/pytorch\/examples\/tree\/main\/mnist"
+}

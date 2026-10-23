@@ -1,0 +1,146 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "NSSpeechRecognitionUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer 只用语音识别在这部手机上把你的声音转成文字。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer 只用語音識別在這部手機上把你的聲音轉成文字。"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer usa el reconocimiento de voz solo para convertir tu voz en texto en este teléfono."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer utilise la reconnaissance vocale uniquement pour transformer votre voix en texte sur ce téléphone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer uses speech recognition only to turn your voice into text on this phone."
+          }
+        }
+      }
+    },
+    "NSMicrophoneUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer 只用麦克风在这部手机上把你的声音转成文字。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer 只用麥克風在這部手機上把你的聲音轉成文字。"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer usa el micrófono solo para convertir tu voz en texto en este teléfono."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer utilise le micro uniquement pour transformer votre voix en texte sur ce téléphone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PocketTrainer uses the microphone only to turn your voice into text on this phone."
+          }
+        }
+      }
+    },
+    "NSCameraUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拍照来教模型认识你自己的东西"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拍照來教模型認識你自己的東西"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz fotos para enseñar al modelo tus propios objetos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prenez des photos pour apprendre au modèle vos propres objets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Take photos to teach the model your own objects"
+          }
+        }
+      }
+    },
+    "NSPhotoLibraryUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "选照片来教模型认识你自己的东西"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選照片來教模型認識你自己的東西"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige fotos para enseñar al modelo tus propios objetos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez des photos pour apprendre au modèle vos propres objets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick photos to teach the model your own objects"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}
