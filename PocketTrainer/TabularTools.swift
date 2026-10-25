@@ -39,7 +39,7 @@ enum TabularTools {
 
     static func parseCSV(_ text: String) -> TableData {
         var rows: [[String]] = [], row: [String] = [], field = "", inQ = false
-        let chars = Array(text.unicodeScalars)
+        let chars = Array(text.unicodeScalars.drop { $0 == "\u{FEFF}" })     // 去掉开头的 BOM（Excel 存的 CSV 常有）
         var i = 0
         while i < chars.count {
             let c = chars[i]
@@ -51,8 +51,11 @@ enum TabularTools {
             i += 1
         }
         if !field.isEmpty || !row.isEmpty { row.append(field); rows.append(row) }
-        guard let head = rows.first else { return TableData(columns: [], rows: [], numeric: []) }
-        let body = rows.dropFirst().filter { $0.count == head.count }.prefix(maxRows)
+        guard var head = rows.first else { return TableData(columns: [], rows: [], numeric: []) }
+        while head.count > 1, head.last?.trimmingCharacters(in: .whitespaces).isEmpty == true { head.removeLast() }   // 表头末尾多一个逗号（空列）
+        let n = head.count
+        let body = rows.dropFirst().map { $0.count > n && $0[n...].allSatisfy { $0.trimmingCharacters(in: .whitespaces).isEmpty } ? Array($0.prefix(n)) : $0 }
+            .filter { $0.count == n }.prefix(maxRows)
         return make(head.map { $0.trimmingCharacters(in: .whitespaces) }, Array(body))
     }
 
@@ -66,9 +69,16 @@ enum TabularTools {
     }
 
     private static func make(_ cols: [String], _ rows: [[String]]) -> TableData {
-        let numeric = cols.indices.map { c in rows.allSatisfy { Double($0[c].trimmingCharacters(in: .whitespaces)) != nil } }
+        // 数字列：除了空格 / NA 这类「缺失」以外全是数字
+        let numeric = cols.indices.map { c in
+            let v = rows.map { $0[c].trimmingCharacters(in: .whitespaces) }.filter { !isMissing($0) }
+            return !v.isEmpty && v.allSatisfy { Double($0) != nil }
+        }
         return TableData(columns: cols, rows: rows, numeric: numeric)
     }
+
+    static func isMissing(_ v: String) -> Bool { ["", "NA", "N/A", "NaN", "nan", "null", "?"].contains(v) }
+    static func number(_ v: String) -> Double? { Double(v.trimmingCharacters(in: .whitespaces)) }
 
     /// 猜标签列：从右往左找第一个「2~10 种不同取值」的列
     static func guessLabel(_ t: TableData) -> Int { t.columns.indices.reversed().first { (2...10).contains(t.distinct($0)) } ?? t.columns.count - 1 }
@@ -99,8 +109,9 @@ enum TabularTools {
         let nTest = max(5, idx.count / 5), test = Array(idx.prefix(nTest)), train = Array(idx.dropFirst(nTest))
         // 用训练行算均值和标准差
         var mean = [Double](repeating: 0, count: fi.count), sd = [Double](repeating: 0, count: fi.count)
-        for (k, c) in fi.enumerated() { let v = train.map { Double(t.rows[$0][c]) ?? 0 }; mean[k] = v.reduce(0, +) / Double(v.count); sd[k] = max((v.map { ($0 - mean[k]) * ($0 - mean[k]) }.reduce(0, +) / Double(v.count)).squareRoot(), 1e-6) }
-        func feats(_ r: Int, into x: inout [Float], at o: Int) { for (k, c) in fi.enumerated() { x[o + k] = Float(((Double(t.rows[r][c]) ?? 0) - mean[k]) / sd[k]) } }
+        for (k, c) in fi.enumerated() { let v = train.compactMap { number(t.rows[$0][c]) }; let m = max(v.count, 1); mean[k] = v.reduce(0, +) / Double(m); sd[k] = max((v.map { ($0 - mean[k]) * ($0 - mean[k]) }.reduce(0, +) / Double(m)).squareRoot(), 1e-6) }
+        // 缺失值（NA）当作平均值，标准化后是 0
+        func feats(_ r: Int, into x: inout [Float], at o: Int) { for (k, c) in fi.enumerated() { x[o + k] = Float(((number(t.rows[r][c]) ?? mean[k]) - mean[k]) / sd[k]) } }
         let steps = max(1, (train.count + batchSize - 1) / batchSize), nTrain = steps * batchSize      // 重复训练行凑满批次
         var tx = [Float](repeating: 0, count: nTrain * featureDim), ty = [UInt8](repeating: 0, count: nTrain)
         for i in 0..<nTrain { let r = train[i % train.count]; feats(r, into: &tx, at: i * featureDim); ty[i] = UInt8(classes.firstIndex(of: t.rows[r][li]) ?? 0) }

@@ -1,0 +1,49 @@
+{
+  "accuracy" : 0.96666666666666667,
+  "classes" : [
+    "Iris-setosa",
+    "Iris-versicolor",
+    "Iris-virginica"
+  ],
+  "count" : 150,
+  "cpuReferenceAccuracy" : 0.96666666666666667,
+  "data" : "iris",
+  "dataFiles" : [
+    "Iris.csv",
+    "source.json",
+    "tabular.json"
+  ],
+  "dataKey" : "hf:iris",
+  "downloadSeconds" : 0.14964902400970459,
+  "flaggedSteps" : 0,
+  "license" : "CC0-1.0",
+  "log" : [
+    "Step 200\/200  loss: 0.134  val_loss: 0.095  val_acc: 96.7%",
+    "Validation: OK",
+    "Test accuracy: 96.7% (30 rows the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 200,
+    "hidden" : 32,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.96666666666666667,
+  "resultCorrect" : 29,
+  "resultFirst" : [
+    "Iris-setosa 99% (answer Iris-setosa)",
+    "Iris-virginica 98% (answer Iris-virginica)",
+    "Iris-virginica 87% (answer Iris-virginica)",
+    "Iris-versicolor 94% (answer Iris-versicolor)",
+    "Iris-versicolor 98% (answer Iris-versicolor)",
+    "Iris-setosa 99% (answer Iris-setosa)",
+    "Iris-virginica 96% (answer Iris-virginica)",
+    "Iris-setosa 99% (answer Iris-setosa)"
+  ],
+  "resultItems" : 30,
+  "resultMs" : 0.37705898284912109,
+  "seconds" : 1.9425870180130005,
+  "stamp" : "hf:iris",
+  "steps" : 200,
+  "trainSeconds" : 0.74826693534851074
+}

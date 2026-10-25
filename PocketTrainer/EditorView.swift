@@ -51,44 +51,37 @@ struct EditorView: View {
     @State private var bigChart = false
     @State private var showHistory = false
     @State private var showTeach = false
+    @State private var page = 0                  // 顶部两个页签：0 = Training（训练），1 = Result（结果）
+    @ObservedObject private var gen = GenTrainer.shared
 
     private var isModel: Bool { current == recipe }
     private var canRun: Bool { kind == "photos" || recipe != nil }
     private var kind: String { store.projects.first { $0.name == project }?.kind ?? "cifar" }
-    private var mine: Bool { trainer.currentProject == project }       // Output 是不是这个项目的
+    private var isGen: Bool { kind == "generator" }
+    private var mine: Bool { isGen ? gen.project == project : trainer.currentProject == project }       // Output 是不是这个项目的
+    private var busy: Bool { trainer.running || gen.running }
+    private var hasResult: Bool { canRun && kind != "photos" }
+    private var log: [String] { mine ? (isGen ? gen.log : trainer.log) : [] }
+    private var points: [LossPoint] { mine ? (isGen ? gen.lossPoints : trainer.lossPoints) : [] }
 
     /// 录屏演示（--auto-demo 启动）：训练时页面自动滚到底，让曲线和结果横幅都在画面里
     private var demoMode: Bool { CommandLine.arguments.contains { $0.hasPrefix("--auto-demo=") } }
     var body: some View {
-        ScrollViewReader { demoProxy in
-            editorBody
-                .onChange(of: trainer.step) { _ in if demoMode { withAnimation { demoProxy.scrollTo("demoEnd", anchor: .bottom) } } }
-                .onChange(of: trainer.running) { _ in if demoMode { withAnimation { demoProxy.scrollTo("demoEnd", anchor: .bottom) } } }
-        }
-    }
-
-    private var editorBody: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
-                tabBar
-                CodeBox(text: $text, line: $line)
-                Text("PocketTrainer runs your settings with its built-in trainer (not full Python).").font(.caption).foregroundColor(.secondary)
-                if isModel && kind != "photos" { paramsCard }
-                Button(kind == "photos" ? tr("Open photo teacher") : (trainer.running ? tr("Running…") : tr("Run"))) { run() }
-                    .buttonStyle(TealButtonStyle()).disabled(trainer.running || !canRun)
-                if !canRun {
-                    Text("This project can be read and edited. PocketTrainer can only run recipes with its built-in trainer (not full Python or PyTorch).").font(.footnote).foregroundColor(.secondary)
+        VStack(spacing: 0) {
+            if hasResult {
+                Picker("", selection: $page) { Text("Training").tag(0); Text("Result").tag(1) }
+                    .pickerStyle(.segmented).padding(.horizontal, 14).padding(.top, 8).padding(.bottom, 4)
+            }
+            if page == 1 && hasResult {
+                ResultView(project: project, kind: kind)
+            } else {
+                ScrollViewReader { demoProxy in
+                    editorBody
+                        .onChange(of: trainer.step) { _ in if demoMode { withAnimation { demoProxy.scrollTo("demoEnd", anchor: .bottom) } } }
+                        .onChange(of: trainer.running) { _ in if demoMode { withAnimation { demoProxy.scrollTo("demoEnd", anchor: .bottom) } } }
+                        .onChange(of: gen.step) { _ in if demoMode { withAnimation { demoProxy.scrollTo("demoEnd", anchor: .bottom) } } }
                 }
-                if kind == "import" {
-                    Button { showMap = true } label: { Label("Map to recipe", systemImage: "arrow.triangle.branch").frame(maxWidth: .infinity) }.buttonStyle(.bordered).tint(.teal)
-                }
-                if !error.isEmpty { Text(error).font(.footnote).foregroundColor(.red) }
-                if kind == "import" { ProjectToolsCard(project: project) }
-                if canRun && kind != "photos" { outputCard; lossCard.id("demoEnd"); ExportCard(project: project, isPhotoProject: kind == "cifar") }
-                NavigationLink(value: Route.lab) {
-                    Label("Protection lab", systemImage: "shield.lefthalf.filled").frame(maxWidth: .infinity)
-                }.buttonStyle(.bordered).tint(.teal)
-            }.padding(14)
+            }
         }
         .background(Color.pageBackground)
         .navigationBarTitleDisplayMode(.inline)
@@ -102,6 +95,7 @@ struct EditorView: View {
             }
         }
         .onAppear {
+            if CommandLine.arguments.contains("--page=result") { page = 1 }
             store.touch(project)
             refreshRecipe()
             if router.openExplain { router.openExplain = false; showExplain = true }
@@ -116,10 +110,43 @@ struct EditorView: View {
         .onChange(of: epochs) { _ in paramChanged("epochs", epochs) }
         .sheet(isPresented: $router.showAddNote) { AddNoteSheet(project: project, file: current, line: line, text: $text) }
         .sheet(isPresented: $showHistory) { HistorySheet(project: project, file: current, text: $text) }
-        .sheet(isPresented: $bigChart) { LossChart(points: trainer.lossPoints).frame(height: 320).padding().presentationDetents([.medium]) }
+        .sheet(isPresented: $bigChart) { LossChart(points: points).frame(height: 320).padding().presentationDetents([.medium]) }
         .sheet(isPresented: $showTeach) { TeachView() }
         .sheet(isPresented: $showExplain) { AskChatGPTSheet(context: ChatContext.file(project: project, file: current, text: text), question: "Please explain this file in simple words for a high-school student. What does each part do?") }
         .sheet(isPresented: $showMap, onDismiss: { refreshRecipe(); load() }) { MapRecipeSheet(project: project) }
+    }
+
+    private var editorBody: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 12) {
+                if kind == "cifar" || isGen { DataCard(project: project, kind: kind, willChange: { save() }, changed: { load() }) }   // 换数据会改配方里的数：先存、换完重读
+                tabBar
+                CodeBox(text: $text, line: $line)
+                Text("PocketTrainer runs your settings with its built-in trainer (not full Python).").font(.caption).foregroundColor(.secondary)
+                if isModel && kind != "photos" { paramsCard }
+                Button(kind == "photos" ? tr("Open photo teacher") : (busy ? tr("Running…") : tr("Run"))) { run() }
+                    .buttonStyle(TealButtonStyle()).disabled(busy || !canRun)
+                if !canRun {
+                    Text("This project can be read and edited. PocketTrainer can only run recipes with its built-in trainer (not full Python or PyTorch).").font(.footnote).foregroundColor(.secondary)
+                }
+                if kind == "import" {
+                    Button { showMap = true } label: { Label("Map to recipe", systemImage: "arrow.triangle.branch").frame(maxWidth: .infinity) }.buttonStyle(.bordered).tint(.teal)
+                }
+                if !error.isEmpty { Text(error).font(.footnote).foregroundColor(.red) }
+                if kind == "import" { ProjectToolsCard(project: project) }
+                if canRun && kind != "photos" {
+                    outputCard
+                    if isGen { lossCard; previewCard.id("demoEnd") } else { lossCard.id("demoEnd") }
+                    if !isGen { ExportCard(project: project, isPhotoProject: kind == "cifar" && ProjectData.dataKey(project) == "builtin") }
+                    if mine && !busy && !points.isEmpty {
+                        Button { withAnimation { page = 1 } } label: { Label("See the result", systemImage: "sparkles.rectangle.stack").frame(maxWidth: .infinity) }.buttonStyle(.bordered).tint(.teal)
+                    }
+                }
+                NavigationLink(value: Route.lab) {
+                    Label("Protection lab", systemImage: "shield.lefthalf.filled").frame(maxWidth: .infinity)
+                }.buttonStyle(.bordered).tint(.teal)
+            }.padding(14)
+        }
     }
 
     // MARK: 各部分
@@ -162,15 +189,18 @@ struct EditorView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     VStack(alignment: .leading, spacing: 2) {
-                        let lines = mine ? trainer.log : []
+                        let lines = log
                         if lines.isEmpty { Text("Press Run to start training.").foregroundColor(.secondary) }
                         ForEach(Array(lines.enumerated()), id: \.offset) { i, l in Text(l).id(i) }
                     }.font(.system(size: 11.5, design: .monospaced)).frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .frame(height: 150)
-                .onChange(of: trainer.log.count) { n in proxy.scrollTo(n - 1, anchor: .bottom) }
+                .onChange(of: log.count) { n in proxy.scrollTo(n - 1, anchor: .bottom) }
             }
-            if mine && trainer.running { ProgressView(value: Double(trainer.step), total: Double(max(trainer.totalSteps, 1))) }
+            if mine && busy {
+                if isGen { ProgressView(value: Double(gen.step), total: Double(max(gen.totalSteps, 1))) }
+                else { ProgressView(value: Double(trainer.step), total: Double(max(trainer.totalSteps, 1))) }
+            }
         }
     }
 
@@ -178,7 +208,21 @@ struct EditorView: View {
         Card {
             HStack { Text("Loss (smaller is better)").font(.headline); Spacer()
                 Button { bigChart = true } label: { Image(systemName: "arrow.up.left.and.arrow.down.right") } }
-            LossChart(points: mine ? trainer.lossPoints : []).frame(height: 150)
+            LossChart(points: points).frame(height: 150)
+        }
+    }
+
+    /// 生成器训练时：每轮画一排「它现在会画什么」，看它从噪声慢慢学会画
+    private var previewCard: some View {
+        Card {
+            Text("What it draws now").font(.headline)
+            let pv = mine ? gen.preview : []
+            if pv.isEmpty { Text("Press Run. Each epoch, the model draws one picture of every class here.").font(.footnote).foregroundColor(.secondary) }
+            else {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 5), spacing: 3) {
+                    ForEach(pv.indices, id: \.self) { i in PixelView(image: PixelImage.gray(pv[i]), size: 54) }
+                }
+            }
         }
     }
 
@@ -231,12 +275,16 @@ struct EditorView: View {
         guard let h = ConfigCode.value("hidden_units", in: model).flatMap(Int.init), (8...1024).contains(h) else { error = tr("hidden_units must be a whole number from 8 to 1024."); return }
         guard let e = ConfigCode.value("epochs", in: model).flatMap(Int.init), (1...300).contains(e) else { error = tr("epochs must be a whole number from 1 to 300."); return }
         error = ""
+        let seed = ConfigCode.value("seed", in: model).flatMap(UInt64.init) ?? 1
+        if isGen {                                                           // 生成器项目：训练 CVAE（见 Generator.swift）
+            do { try gen.start(project: project, hidden: h, lr: l, epochs: e, seed: seed) } catch let e { error = e.localizedDescription }
+            return
+        }
         trainer.lr = l; trainer.hidden = h; trainer.epochs = e
-        trainer.seed = ConfigCode.value("seed", in: model).flatMap(UInt64.init) ?? 1
+        trainer.seed = seed
         trainer.protect = UserDefaults.standard.bool(forKey: "verify")       // 设置里的「Verify training results」
-        if TabularTools.config(project: project) != nil {                    // 表格项目：用表格数据训练
-            do { trainer.dataset = try TabularTools.buildDataset(project: project).0 } catch let e { error = e.localizedDescription; return }
-        } else { trainer.dataset = Dataset.shared }
+        // 用哪份数据：下载的图片 / 表格 → 内置照片特征（见 OpenData.swift）
+        do { trainer.dataset = try ProjectData.trainingDataset(project: project) } catch let e { error = e.localizedDescription; return }
         trainer.currentProject = project
         trainer.start()
         trainer.interruptArmed = false; trainer.crashArmed = false             // 打断/闪退演示只对这一次 Run 有效
@@ -254,6 +302,7 @@ struct LossChart: View {
             }
         }
         .chartForegroundStyleScale(["Train loss": Color.blue, "Val loss": Color.teal])
+        .chartYScale(domain: .automatic(includesZero: false))      // 纵轴按数据范围：生成器的损失在 150~320，从 0 画起会压成一条平线
         .chartLegend(position: .top, alignment: .trailing)
         .chartXAxisLabel("Step")
     }

@@ -16,6 +16,7 @@ struct OnboardingView: View {
             Image(systemName: pages[page].icon).font(.system(size: 64)).foregroundColor(.teal).accessibilityHidden(true)
             Text(LocalizedStringKey(pages[page].title)).font(.title.bold()).multilineTextAlignment(.center)
             Text(LocalizedStringKey(pages[page].text)).font(.body).foregroundColor(.secondary).multilineTextAlignment(.center).padding(.horizontal, 24)
+            Text("A student project by Luckison Du").font(.footnote).foregroundColor(.secondary)
             Spacer()
             HStack(spacing: 8) { ForEach(0..<pages.count, id: \.self) { i in Circle().fill(i == page ? Color.teal : Color.gray.opacity(0.3)).frame(width: 8, height: 8) } }.accessibilityHidden(true)
             Button(page < pages.count - 1 ? "Next" : "Get started") {

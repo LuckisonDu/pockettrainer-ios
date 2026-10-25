@@ -114,7 +114,7 @@ extension Trainer {
         DispatchQueue.main.async {
             self.compareRows = rows; self.compareNote = note
             self.running = false; self.comparing = false; self.computingReference = false
-            UIApplication.shared.isIdleTimerDisabled = false
+            UIApplication.shared.isIdleTimerDisabled = testKeepAwake
         }
     }
 }

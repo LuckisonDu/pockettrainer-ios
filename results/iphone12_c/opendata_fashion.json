@@ -1,0 +1,56 @@
+{
+  "accuracy" : 0.78500000000000003,
+  "classes" : [
+    "T - shirt \/ top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+  ],
+  "count" : 2000,
+  "cpuReferenceAccuracy" : 0.78500000000000003,
+  "data" : "fashion",
+  "dataFiles" : [
+    "images.u8",
+    "labels.u8",
+    "source.json"
+  ],
+  "dataKey" : "hf:fashion",
+  "downloadSeconds" : 52.340579986572266,
+  "flaggedSteps" : 0,
+  "license" : "MIT",
+  "log" : [
+    "Step 195\/195  loss: 0.384  val_loss: 0.623  val_acc: 78.5%",
+    "Validation: OK",
+    "Test accuracy: 78.5% (400 pictures the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 15,
+    "hidden" : 128,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.78500000000000003,
+  "resultCorrect" : 99,
+  "resultFirst" : [
+    "Bag 99% (answer Bag)",
+    "Coat 45% (answer Coat)",
+    "Coat 52% (answer Trouser)",
+    "Sandal 85% (answer Sandal)",
+    "Bag 96% (answer Bag)",
+    "Pullover 43% (answer Pullover)",
+    "Shirt 38% (answer Dress)",
+    "Sneaker 96% (answer Sneaker)"
+  ],
+  "resultItems" : 120,
+  "resultMs" : 1.1080503463745117,
+  "seconds" : 54.518260955810547,
+  "stamp" : "hf:fashion",
+  "steps" : 195,
+  "trainSeconds" : 1.0413399934768677
+}

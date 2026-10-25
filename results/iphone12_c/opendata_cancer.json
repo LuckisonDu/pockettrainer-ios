@@ -1,0 +1,48 @@
+{
+  "accuracy" : 0.96460176991150437,
+  "classes" : [
+    "B",
+    "M"
+  ],
+  "count" : 569,
+  "cpuReferenceAccuracy" : 0.96460176991150437,
+  "data" : "cancer",
+  "dataFiles" : [
+    "breast_cancer.csv",
+    "source.json",
+    "tabular.json"
+  ],
+  "dataKey" : "hf:cancer",
+  "downloadSeconds" : 0.25806403160095215,
+  "flaggedSteps" : 0,
+  "license" : "CC-BY-SA-4.0",
+  "log" : [
+    "Step 200\/200  loss: 0.036  val_loss: 0.080  val_acc: 96.5%",
+    "Validation: OK",
+    "Test accuracy: 96.5% (113 rows the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 50,
+    "hidden" : 32,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.96460176991150437,
+  "resultCorrect" : 109,
+  "resultFirst" : [
+    "Malignant (M) 99% (answer Malignant (M))",
+    "Benign (B) 99% (answer Benign (B))",
+    "Benign (B) 99% (answer Benign (B))",
+    "Benign (B) 65% (answer Benign (B))",
+    "Malignant (M) 99% (answer Malignant (M))",
+    "Benign (B) 99% (answer Benign (B))",
+    "Benign (B) 99% (answer Benign (B))",
+    "Malignant (M) 99% (answer Malignant (M))"
+  ],
+  "resultItems" : 113,
+  "resultMs" : 0.73897838592529297,
+  "seconds" : 2.0944629907608032,
+  "stamp" : "hf:cancer",
+  "steps" : 200,
+  "trainSeconds" : 0.69966995716094971
+}

@@ -1,0 +1,37 @@
+{
+  "classifierAgrees" : 1,
+  "classifierProject" : "Open data mnist",
+  "count" : 2000,
+  "data" : "mnist",
+  "downloadSeconds" : 0.15163803100585938,
+  "info" : {
+    "data" : "hf:mnist",
+    "dataTitle" : "Handwritten digits (MNIST)",
+    "date" : 1792945432.101377,
+    "device" : "iPhone13,2",
+    "epochs" : 40,
+    "hidden" : 400,
+    "learningRate" : 0.001,
+    "pictures" : 1600,
+    "seconds" : 6.4395020008087158,
+    "steps" : 1000,
+    "valKL" : 4.0300602912902832,
+    "valRecon" : 156.48968505859375
+  },
+  "log" : [
+    "Epoch 39\/40  loss: 150.9  val_loss: 160.7",
+    "Epoch 40\/40  loss: 150.5  val_loss: 160.5",
+    "Done: 1,000 steps in 6.4 s on this phone. Open the Result tab to see what it draws."
+  ],
+  "lossFirst" : 323.98934936523438,
+  "lossLast" : 150.52737426757812,
+  "project" : "Picture generator",
+  "recipe" : {
+    "epochs" : 40,
+    "hidden" : 400,
+    "lr" : 0.001
+  },
+  "reconstructMAE" : 0.095453932046993289,
+  "seconds" : 6.730821967124939,
+  "valLast" : 160.51974487304688
+}

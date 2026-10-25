@@ -27,12 +27,20 @@ open PocketTrainer.xcodeproj # set your Team, press Run on a real iPhone (Metal 
 | `LabView.swift`, `Extras.swift` | Protection lab: interruption, crash, Compare methods, GPU limit; memory/thermal/battery |
 | `Trainer.swift`, `MLCore.swift`, `GPUCore.swift`, `Checkpoint.swift` | The training core: GPU step, CPU shadow check, atomic checkpoints, resume (unchanged logic) |
 | `Projects.swift`, `RunHistory.swift`, `Theme.swift`, `TeachView.swift` | Project folders, run history, look and feel, "Teach it your photos" |
+| `OpenData.swift`, `DataViews.swift` | Data card on the Training tab: choose a small open dataset on Hugging Face, download it into the project's `data/` folder, train on it |
+| `ResultView.swift` | Result tab: test items the model never saw go through the trained model on the phone (input → model → output, how sure, right or wrong); draw a digit for MNIST |
+| `Generator.swift` | Picture generator project: a small conditional VAE (picture + class → 2 "style" numbers → picture) trained on the phone CPU with a hand-written backward pass and Adam |
 | `Resources/` | Data (float16 features, 28 MB), dataset checksums, ResNet50 feature model |
 | `tools/` | Resource scripts, on-device test runner (`run_matrix.sh`), screenshots (`shots.sh`), `make_verify.py` |
 | `VERIFY.md`, `AI_DISCLOSURE.md` | Measured results; how AI tools were used |
 
 The built-in trainer reads only `hidden_units`, `learning_rate`, `epochs`, `seed` from `code/model.py`; everything else in the code is shown for learning, not run as Python. Project packs are plain text and never contain runnable code.
 
+
+## Training | Result tabs, open data, picture generator (added 2026-10-25)
+- Every runnable project has two tabs at the top: **Training** (data, code, Run, output, loss) and **Result** (what the trained model does with test data it never saw, computed on the phone; nothing is sent anywhere).
+- **Data**: the Training tab's Data card opens a short list of small open datasets on Hugging Face (MNIST, Fashion-MNIST, Iris, Fish, Breast Cancer Wisconsin, Palmer Penguins) with their live license and download count. The chosen one is downloaded into the project's `data/` folder (`source.json` records where it came from and its license) and used for training; the recipe numbers are set for about 200 steps.
+- **Picture generator**: a new project template that trains a small image-generation model on the phone (conditional VAE, 2 style numbers). Its Training tab shows what it draws after every epoch; its Result tab draws new pictures of a chosen class, a 7×7 style map and encode → decode copies. It is small and blurry by design; it is not a large text-to-image model.
 
 ## Find, download and set up projects (GitHub and Hugging Face)
 - **Find projects** (Projects > + > Find projects): search GitHub (python repositories) and Hugging Face (models or datasets) through their public APIs. No account or key. Results are cached on the phone.

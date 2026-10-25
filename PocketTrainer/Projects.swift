@@ -22,6 +22,8 @@ struct Template: Identifiable {
                  blurb: "Show it about 15 photos of 3 things and it learns them."),
         Template(id: "lab", title: "Learning-rate lab", kind: "cifar", hidden: 128, lr: 0.2, epochs: 6,
                  blurb: "Change the learning rate and watch what happens."),
+        Template(id: "generator", title: "Picture generator", kind: "generator", hidden: 400, lr: 0.001, epochs: 40,
+                 blurb: "Train a small AI that draws new pictures, like handwritten digits."),
     ]
 }
 
@@ -68,8 +70,10 @@ final class ProjectStore: ObservableObject {
 
     /// 第一次启动：把三个模板都建成项目
     private func ensureTemplates() {
-        guard !FileManager.default.fileExists(atPath: Self.root.path) else { return }
-        for t in Template.all { _ = create(t, name: t.title) }
+        defer { UserDefaults.standard.set(true, forKey: "tplGenerator") }
+        guard FileManager.default.fileExists(atPath: Self.root.path) else { for t in Template.all { _ = create(t, name: t.title) }; return }
+        // 老用户升级：只补一次新加的「Picture generator」模板（删了就不再补）
+        if !UserDefaults.standard.bool(forKey: "tplGenerator"), let g = Template.all.first(where: { $0.id == "generator" }) { _ = create(g, name: g.title) }
     }
 
     // MARK: 新建 / 删除
@@ -122,6 +126,22 @@ final class ProjectStore: ObservableObject {
     // MARK: 模板里的代码文本
 
     static func modelPy(_ t: Template) -> String {
+        if t.kind == "generator" {
+            return """
+            # Picture generator: a small conditional VAE, trained on this phone
+            # PocketTrainer reads these four lines.
+            hidden_units = \(t.hidden)
+            learning_rate = \(t.lr)
+            epochs = \(t.epochs)
+            seed = 1
+
+            # The model (shown for learning):
+            # encoder: picture (28x28 = 784) + class (10) -> hidden_units (ReLU) -> 2 "style" numbers
+            # decoder: 2 style numbers + class (10) -> hidden_units (ReLU) -> picture (784)
+            # After training: pick a class + 2 random numbers -> a new picture.
+
+            """
+        }
         if t.kind == "photos" {
             return """
             # Teach it your photos (PocketTrainer runs this with its built-in photo teacher)

@@ -60,6 +60,7 @@ struct AboutView: View {
     var body: some View {
         List {
             Section { HStack { Spacer(); LogoMark(size: 72); Spacer() } }
+            Section("Made by") { Text("A student project by Luckison Du."); Link("Source code and contact", destination: URL(string: "https://github.com/LuckisonDu/pockettrainer-ios")!) }
             Section { Text("PocketTrainer trains a small AI on your phone, offline. It double-checks every training step on the CPU, so a silent GPU failure cannot ruin the result.") }
             Section { Text("Translations are machine-assisted and may contain mistakes.") }
             Section("Open data and models") {

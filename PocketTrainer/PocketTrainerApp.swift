@@ -1,8 +1,11 @@
 // PocketTrainerApp.swift —— App 入口
 // 另外支持「启动参数」，只给我们自己做真机自动验证用（界面上不出现）：
-//   --auto-demo=baseline | protect_on | protect_off | crash | compare | limit | import | search | setup | coreml | dataset | export    不点屏幕，自动跑一轮，结果写进 Documents/result.json
+//   --auto-demo=baseline | protect_on | protect_off | crash | compare | limit | import | search | setup | coreml | dataset | export | opendata | gen    不点屏幕，自动跑一轮，结果写进 Documents/result.json
 //   --tag=<名字>   写进结果里，方便核对是哪一次    --seed=<数字>   换一个随机种子
 import SwiftUI
+
+/// 真机自动测试 / 截图（带 --auto-demo / --screen / --skip-onboarding 启动）时屏幕常亮：两步之间手机锁屏会拉不到结果、截不到图
+let testKeepAwake = CommandLine.arguments.contains { $0.hasPrefix("--auto-demo") || $0.hasPrefix("--screen=") || $0 == "--skip-onboarding" }
 
 @main
 struct PocketTrainerApp: App {
@@ -30,6 +33,7 @@ struct PocketTrainerApp: App {
     }
 
     @MainActor private func bootstrap() {
+        if testKeepAwake { UIApplication.shared.isIdleTimerDisabled = true }
         if let t = arg("tag") { trainer.tag = t }
         if let p = arg("pace-ms").flatMap({ Double($0) }) { trainer.paceMs = p }
         if let s = arg("seed").flatMap({ UInt64($0) }) { trainer.seed = s }
@@ -54,6 +58,8 @@ struct PocketTrainerApp: App {
         case "setup":   AutoDemo.setup(url: arg("url") ?? "", store: store); return
         case "coreml":  AutoDemo.coreml(repo: arg("repo") ?? "apple/coreml-resnet-50", model: arg("model"), store: store); return
         case "dataset": AutoDemo.dataset(repo: arg("repo") ?? "scikit-learn/iris", store: store, trainer: trainer); return
+        case "opendata": AutoDemo.openData(id: arg("data") ?? "iris", store: store, trainer: trainer, router: router); return
+        case "gen":     AutoDemo.generator(id: arg("data") ?? "mnist", store: store, router: router); return
         case "limit":   try? FileManager.default.removeItem(at: Store.docs.appendingPathComponent("limit.json")); trainer.measureLimit(); return
         case "crash":       trainer.protect = true;  trainer.crashArmed = true
         default: return

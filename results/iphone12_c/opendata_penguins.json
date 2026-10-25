@@ -1,0 +1,49 @@
+{
+  "accuracy" : 0.98529411764705888,
+  "classes" : [
+    "Adelie",
+    "Chinstrap",
+    "Gentoo"
+  ],
+  "count" : 344,
+  "cpuReferenceAccuracy" : 0.98529411764705888,
+  "data" : "penguins",
+  "dataFiles" : [
+    "penguins.csv",
+    "source.json",
+    "tabular.json"
+  ],
+  "dataKey" : "hf:penguins",
+  "downloadSeconds" : 0.22116398811340332,
+  "flaggedSteps" : 0,
+  "license" : "CC0-1.0",
+  "log" : [
+    "Step 198\/198  loss: 0.080  val_loss: 0.063  val_acc: 98.5%",
+    "Validation: OK",
+    "Test accuracy: 98.5% (68 rows the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 66,
+    "hidden" : 32,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.98529411764705888,
+  "resultCorrect" : 67,
+  "resultFirst" : [
+    "Adelie 74% (answer Adelie)",
+    "Adelie 99% (answer Adelie)",
+    "Gentoo 99% (answer Gentoo)",
+    "Adelie 53% (answer Gentoo)",
+    "Adelie 95% (answer Adelie)",
+    "Gentoo 99% (answer Gentoo)",
+    "Adelie 99% (answer Adelie)",
+    "Adelie 97% (answer Adelie)"
+  ],
+  "resultItems" : 68,
+  "resultMs" : 0.67806243896484375,
+  "seconds" : 2.0378680229187012,
+  "stamp" : "hf:penguins",
+  "steps" : 198,
+  "trainSeconds" : 0.69593596458435059
+}

@@ -3,7 +3,7 @@
 Prepared 2026-10-20 from the actual development log. Edit this file so it matches what the student did herself/himself.
 
 ## Tools
-Source code was written with **Claude Code (Claude Sonnet 5.5, Anthropic)** from a written specification supplied by the team.
+Source code was written with **Claude Code (Claude Sonnet 5.5, Anthropic)** from a written specification supplied by the team; the 2026-10-25 additions (open data, Result tab, picture generator) were written with Claude Code (Claude Opus 5.5).
 The AI wrote the Swift code, build scripts, test scripts and README; the team defined the idea, the behaviour,
 the experiments, and ran/checked the results on real iPhones. The AI did not run anything outside the team's own machines.
 
@@ -21,15 +21,18 @@ the experiments, and ran/checked the results on real iPhones. The AI did not run
 | `AskChatGPT`, `Speech`, `L10n`, `Localizable.xcstrings` | **New** (AI). Translations (zh-Hans, zh-Hant via OpenCC, es, fr) were produced by AI and are machine-assisted |
 | `PocketTrainerApp.swift` | **New** (AI): SwiftUI interface, Swift Charts curve, test-only launch flags, UI screenshot renderer |
 | `OnboardingView.swift` (first-run 3-step guide), `ExportView.swift` (Export card), `CoreMLExport.swift` (hand-written Core ML / safetensors writer, verification against the CPU result) | **New** (AI), 2026-10-21/22 |
+| `OpenData.swift`, `DataViews.swift` (Data card: pick a small open dataset on Hugging Face, download it into the project's `data/` folder and train on it), `ResultView.swift` (Result tab: test items go through the trained model on the phone — input → model → output; draw-a-digit), `Generator.swift` (Picture generator: a small conditional VAE with hand-written forward/backward pass and Adam, trained on the phone's CPU) | **New** (AI), 2026-10-25 |
 | `TeachView.swift` (bonus) | **New** (AI): photo picking, Core ML feature extraction, tiny 3-class classifier, self-test |
 | `tools/*.sh`, `build_install.sh`, `project.yml` | Build/install flow adapted from our earlier app's script; test runner **new** (AI) |
 | `tools/make_resources.py`, `tools/export_features_model.py` | **New** (AI) |
 | `Resources/*.f16, *.u8` | Data made by our earlier script `make_head_data.py` (CIFAR-10 → ResNet50 features), converted to float16 |
+| `Resources/cifar_thumbs.u8` | 80 CIFAR-10 test images (8 per class, 32×32) shown on the Result tab; an AI-written check confirmed each one is the image behind the bundled test features (ResNet50 feature match) |
 | `Resources/ResNet50Features.mlpackage` | Converted by AI-written script from torchvision ResNet50 ImageNet weights |
 
 ## Third-party material (all public, commercially usable)
 - CIFAR-10 dataset (Krizhevsky, 2009). 
 - torchvision ResNet50 ImageNet weights (BSD-3-Clause).
+- Open datasets the user can choose to download from Hugging Face (not bundled): MNIST (MIT), Fashion-MNIST (MIT), Iris (CC0), Fish (CC-BY-4.0), Breast Cancer Wisconsin (CC-BY-SA-4.0), Palmer Penguins (CC0).
 - Apple frameworks only: SwiftUI, Swift Charts, Metal, MPSGraph, Accelerate, Core ML, PhotosUI.
 - The only network use is when the user searches or downloads from GitHub / Hugging Face (https, allow-listed hosts; files are shown, never executed). No other libraries. No personal photos or faces are included in the app or its data.
 

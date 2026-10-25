@@ -88,7 +88,7 @@ final class Trainer: ObservableObject {
         guard !running, let s = Store.loadSession() else { return }
         lr = s.config.lr; hidden = s.config.hidden; epochs = s.config.epochs; protect = s.config.protect
         seed = s.config.seed; tag = s.config.tag; currentProject = s.config.project ?? ProjectStore.defaultProject
-        dataset = (s.config.tabular == true ? (try? TabularTools.buildDataset(project: currentProject).0) : nil) ?? Dataset.shared
+        dataset = (s.config.tabular == true ? (try? ProjectData.trainingDataset(project: currentProject)) : nil) ?? Dataset.shared
         launch(s, resume: true)
     }
 
@@ -241,7 +241,7 @@ final class Trainer: ObservableObject {
         DispatchQueue.main.async {
             self.result = r; self.running = false; self.computingReference = false
             self.finishLog(r, flagged: flagged, finalAcc: finalAcc, refAcc: refAcc, finalWeights: finalW, project: cfg.project ?? self.currentProject)
-            UIApplication.shared.isIdleTimerDisabled = false
+            UIApplication.shared.isIdleTimerDisabled = testKeepAwake
             if cfg.protect { self.banner = flagged > 0 ? .fixed(flagged) : .passed }
             else { self.banner = finalAcc < refAcc - 0.10 ? .failed(finalAcc) : .finishedUnprotected }
         }
@@ -252,7 +252,9 @@ extension Trainer {
     /// 训练结束：往 Output 控制台写总结，记进「最近运行」，并把最终权重存成项目里的检查点文件
     func finishLog(_ r: RunResult, flagged: Int, finalAcc: Double, refAcc: Double, finalWeights: Weights, project: String) {
         log.append(tr("Validation: OK"))
-        log.append(dataset === Dataset.shared ? tr("Test accuracy: %.1f%% (2,000 photos the model never saw)", finalAcc * 100) : tr("Test accuracy: %.1f%% (%ld rows the model never saw)", finalAcc * 100, dataset.testCount))
+        log.append(dataset === Dataset.shared ? tr("Test accuracy: %.1f%% (2,000 photos the model never saw)", finalAcc * 100)
+                   : ProjectData.isImages(project) ? tr("Test accuracy: %.1f%% (%ld pictures the model never saw)", finalAcc * 100, dataset.testCount)
+                   : tr("Test accuracy: %.1f%% (%ld rows the model never saw)", finalAcc * 100, dataset.testCount))
         if r.protect { log.append(flagged > 0 ? tr("⚠ Error detected and fixed (%ld)", flagged) : tr("✓ Verified")) }
         else { log.append(finalAcc < refAcc - 0.10 ? tr("✗ Verification is off — the result is wrong (CPU reference %ld%%)", Int(refAcc * 100)) : tr("Verification is off")) }
         let last = lossPoints.last
@@ -260,5 +262,6 @@ extension Trainer {
                                  lr: r.lr, hidden: r.hidden, epochs: r.epochs, seconds: r.seconds,
                                  firstLoss: lossPoints.first?.train ?? 0, lastLoss: last?.train ?? 0, lastValLoss: last?.val ?? 0, resumed: r.resumedFrom != nil))
         ProjectStore.saveFinalCheckpoint(finalWeights, step: r.totalSteps, project: project)
+        ProjectData.stampTrained(project)                  // 记下这个模型是用哪份数据训的（结果页要核对）
     }
 }

@@ -1,0 +1,56 @@
+{
+  "accuracy" : 0.89500000000000002,
+  "classes" : [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9"
+  ],
+  "count" : 2000,
+  "cpuReferenceAccuracy" : 0.89500000000000002,
+  "data" : "mnist",
+  "dataFiles" : [
+    "images.u8",
+    "labels.u8",
+    "source.json"
+  ],
+  "dataKey" : "hf:mnist",
+  "downloadSeconds" : 20.176681995391846,
+  "flaggedSteps" : 0,
+  "license" : "MIT",
+  "log" : [
+    "Step 195\/195  loss: 0.388  val_loss: 0.377  val_acc: 89.5%",
+    "Validation: OK",
+    "Test accuracy: 89.5% (400 pictures the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 15,
+    "hidden" : 128,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.89500000000000002,
+  "resultCorrect" : 102,
+  "resultFirst" : [
+    "8 97% (answer 8)",
+    "0 90% (answer 0)",
+    "4 95% (answer 4)",
+    "5 86% (answer 5)",
+    "1 98% (answer 1)",
+    "2 66% (answer 4)",
+    "9 85% (answer 9)",
+    "4 86% (answer 9)"
+  ],
+  "resultItems" : 120,
+  "resultMs" : 1.0700225830078125,
+  "seconds" : 22.328601002693176,
+  "stamp" : "hf:mnist",
+  "steps" : 195,
+  "trainSeconds" : 1.0675259828567505
+}

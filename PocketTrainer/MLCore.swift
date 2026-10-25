@@ -133,7 +133,7 @@ struct CPUNet {
     }
 
     /// 前向：m 张照片 → 10 类的得分（给评估和算损失用，不改权重）
-    private func logits(_ w: Weights, _ xs: [Float], _ m: Int) -> [Float] {
+    func logits(_ w: Weights, _ xs: [Float], _ m: Int) -> [Float] {
         var z1 = [Float](repeating: 0, count: m * H)
         cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, Int32(m), Int32(H), Int32(D), 1, xs, Int32(D), w.w1, Int32(H), 0, &z1, Int32(H))
         for r in 0..<m { for c in 0..<H { z1[r * H + c] = max(0, z1[r * H + c] + w.b1[c]) } }

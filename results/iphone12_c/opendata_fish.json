@@ -1,0 +1,53 @@
+{
+  "accuracy" : 0.83870967741935487,
+  "classes" : [
+    "Bream",
+    "Parkki",
+    "Perch",
+    "Pike",
+    "Roach",
+    "Smelt",
+    "Whitefish"
+  ],
+  "count" : 159,
+  "cpuReferenceAccuracy" : 0.83870967741935487,
+  "data" : "fish",
+  "dataFiles" : [
+    "Fish.csv",
+    "source.json",
+    "tabular.json"
+  ],
+  "dataKey" : "hf:fish",
+  "downloadSeconds" : 0.22952699661254883,
+  "flaggedSteps" : 0,
+  "license" : "CC-BY-4.0",
+  "log" : [
+    "Step 200\/200  loss: 0.627  val_loss: 0.582  val_acc: 83.9%",
+    "Validation: OK",
+    "Test accuracy: 83.9% (31 rows the model never saw)",
+    "✓ Verified"
+  ],
+  "recipe" : {
+    "epochs" : 200,
+    "hidden" : 32,
+    "lr" : 0.10000000000000001
+  },
+  "resultAccuracy" : 0.83870967741935487,
+  "resultCorrect" : 26,
+  "resultFirst" : [
+    "Perch 39% (answer Smelt)",
+    "Pike 96% (answer Pike)",
+    "Parkki 29% (answer Parkki)",
+    "Pike 92% (answer Pike)",
+    "Bream 58% (answer Parkki)",
+    "Bream 92% (answer Bream)",
+    "Bream 97% (answer Bream)",
+    "Bream 88% (answer Bream)"
+  ],
+  "resultItems" : 31,
+  "resultMs" : 0.36489963531494141,
+  "seconds" : 2.0867969989776611,
+  "stamp" : "hf:fish",
+  "steps" : 200,
+  "trainSeconds" : 0.73281407356262207
+}
