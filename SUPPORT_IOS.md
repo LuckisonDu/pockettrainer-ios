@@ -17,6 +17,8 @@ The optional online tutor connects directly from this iPhone to OpenAI. Open Cha
 
 Image generation projects open directly to their generation screen. Before first use, import a compatible Core ML model folder from Files in Set up models, or configure a licensed public HTTPS manifest. Original PyTorch weights are not an installable Core ML pack. The automatic public download pack is not yet supplied in this build. Existing prepared models are reused on the phone without contacting a personal server. Extra models need substantial device storage and compatible hardware. The built-in learning projects do not require these extra models.
 
+Use Settings > Offline learning tips for local rule-based guidance. Settings > Privacy & data explains local storage, online sharing and support; its essential text is available offline.
+
 ## Troubleshooting
 
 - For a download failure, check internet access, the source address and available storage. Image-generation download addresses must use public HTTPS; compatible folders can also be imported from Files.
