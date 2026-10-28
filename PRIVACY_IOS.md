@@ -26,6 +26,8 @@ Camera and photo access let you select learning examples. Microphone and speech 
 
 Third-party downloads and AI services have their own terms, age requirements and privacy practices. PocketTrainer does not sell personal information or use advertising trackers. Use optional services only when their terms and your parent or guardian's requirements permit it.
 
+The essential privacy and connection explanation is also available offline in Settings > Privacy & data.
+
 ## Contact
 
 Luckison Du: [luckisondu@gmail.com](mailto:luckisondu@gmail.com)
