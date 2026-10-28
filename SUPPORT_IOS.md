@@ -13,13 +13,13 @@ To make another project, use the plus button on Home. Choose a template, review 
 
 ## Optional connected tutor and models
 
-The optional online tutor connects directly from this iPhone to OpenAI. Open Chat or Account, choose Continue with ChatGPT, and complete sign-in on the phone. An eligible ChatGPT plan, permission to use it in PocketTrainer, internet access and available usage are required. No computer, pairing code or Python bridge is needed. If no account is connected, sending an online question starts sign-in. A renewable session refreshes automatically. The on-device coach and saved chats remain available without an online account.
+The optional online tutor connects directly from this iPhone to OpenAI. Open Chat or Account, choose Continue with ChatGPT, and complete sign-in on the phone. An eligible ChatGPT plan, permission to use it in PocketTrainer, internet access and available usage are required. No computer, pairing code or Python bridge is needed. If no account is connected, sending a question shows connection instructions and a Continue with ChatGPT button in the conversation. After the user connects and authorizes plan access, the saved question is retried without duplication. Connection errors are not saved as completed answers in Notes. A renewable session refreshes automatically. The on-device coach and saved chats remain available without an online account.
 
-FLUX projects open directly to image generation. Before first use, import a compatible Core ML model folder from Files in Set up models, or configure a licensed public HTTPS manifest. Original PyTorch weights are not an installable Core ML pack. The automatic public download pack is not yet supplied in this build. Existing prepared models are reused on the phone without contacting a personal server. Extra models need substantial device storage and compatible hardware. The built-in learning projects do not require FLUX models.
+Image generation projects open directly to their generation screen. Before first use, import a compatible Core ML model folder from Files in Set up models, or configure a licensed public HTTPS manifest. Original PyTorch weights are not an installable Core ML pack. The automatic public download pack is not yet supplied in this build. Existing prepared models are reused on the phone without contacting a personal server. Extra models need substantial device storage and compatible hardware. The built-in learning projects do not require these extra models.
 
 ## Troubleshooting
 
-- For a download failure, check internet access, the source address and available storage. FLUX download addresses must use public HTTPS; compatible folders can also be imported from Files.
+- For a download failure, check internet access, the source address and available storage. Image-generation download addresses must use public HTTPS; compatible folders can also be imported from Files.
 - For a disconnected tutor, check internet access and ChatGPT plan permissions. Reconnect in Account if a session was revoked; OpenAI can also restrict availability by account, workspace or region.
 - For interrupted training, reopen the project and use an available saved checkpoint.
 - For speech input, check microphone and speech permissions and whether the selected language supports on-device recognition.
