@@ -1,5 +1,16 @@
 # PocketTrainer for iPhone: Support
 
+## Current iPhone release - October 30, 2026
+
+- Latest uploaded version: **1.0 (13)**, uploaded October 27, 2026.
+- **TestFlight:** build 13 is approved and available for internal and external testing through the [public invitation](https://testflight.apple.com/join/PG93UveP). Check that TestFlight shows **1.0 (13)** when installing/updating.
+- **App Store:** the same uploaded build was submitted October 28, 2026 at 7:51 a.m. Pacific. Its status is **Waiting for Review**, with automatic release after approval. TestFlight approval is separate from App Store approval.
+- Build 13 requires iOS 16 or later. The public source snapshot below has its own build requirements and does not include every component of the submitted build.
+
+[iPhone overview](https://luckisondu.github.io/pockettrainer-web/iphone.html) | [TestFlight instructions](https://luckisondu.github.io/pockettrainer-web/testflight.html) | [Support](https://luckisondu.github.io/pockettrainer-web/support.html) | [Contact](https://luckisondu.github.io/pockettrainer-web/contact.html) | [Privacy](https://luckisondu.github.io/pockettrainer-web/privacy.html) | [All links](https://luckisondu.github.io/pockettrainer-web/links.html)
+
+
+
 PocketTrainer is a native iPhone learning app. Its core projects train and test small models on the phone; they do not require a laptop, a paid AI account or a server.
 
 ## Start with a learning project
@@ -32,3 +43,7 @@ Use Settings > Offline learning tips for local rule-based guidance. Settings > P
 Email [luckisondu@gmail.com](mailto:luckisondu@gmail.com) with the iPhone model, iOS version, PocketTrainer version/build, the action you tried and the exact error. You may attach a screenshot after removing private information. Do not send passwords, connection tokens or private datasets.
 
 [Native iPhone privacy policy](PRIVACY_IOS.md)
+
+## TestFlight feedback
+
+Install/update through the [public beta invitation](https://testflight.apple.com/join/PG93UveP). Use Send Beta Feedback in TestFlight or [email luckisondu@gmail.com](mailto:luckisondu@gmail.com). Apple may share beta crash/usage reports and submitted feedback with the developer under its TestFlight privacy notice. [Current support/contact page](https://luckisondu.github.io/pockettrainer-web/contact.html).

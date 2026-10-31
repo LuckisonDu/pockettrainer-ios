@@ -1,6 +1,6 @@
 # PocketTrainer for iPhone: Privacy
 
-Updated October 27, 2026. This page describes the native iPhone app, rather than its separate browser demonstration.
+Updated October 30, 2026. This page describes the native iPhone app, rather than its separate browser demonstration.
 
 ## On your iPhone
 
@@ -33,3 +33,9 @@ The essential privacy and connection explanation is also available offline in Se
 Luckison Du: [luckisondu@gmail.com](mailto:luckisondu@gmail.com)
 
 [iPhone app support](SUPPORT_IOS.md)
+
+## TestFlight and support reports
+
+Apple TestFlight may collect and share beta crash logs, usage/device information and feedback with the developer. Public-link testers may remain anonymous unless they supply identifying details in their feedback. Reports are used to diagnose issues and improve PocketTrainer. This is distinct from the app's local project storage. See [Apple's TestFlight privacy notice](https://www.apple.com/legal/privacy/data/en/test-flight/).
+
+Support email is processed by the email service and used to respond to your enquiry. Do not send passwords, tokens or private datasets. The [combined current policy](https://luckisondu.github.io/pockettrainer-web/privacy.html) also explains the separate browser edition and third-party service links. [Contact](https://luckisondu.github.io/pockettrainer-web/contact.html).

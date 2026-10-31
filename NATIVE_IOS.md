@@ -2,6 +2,17 @@
 
 **Your phone. Your AI lab.**
 
+## Current iPhone release - October 30, 2026
+
+- Latest uploaded version: **1.0 (13)**, uploaded October 27, 2026.
+- **TestFlight:** build 13 is approved and available for internal and external testing through the [public invitation](https://testflight.apple.com/join/PG93UveP). Check that TestFlight shows **1.0 (13)** when installing/updating.
+- **App Store:** the same uploaded build was submitted October 28, 2026 at 7:51 a.m. Pacific. Its status is **Waiting for Review**, with automatic release after approval. TestFlight approval is separate from App Store approval.
+- Build 13 requires iOS 16 or later. The public source snapshot below has its own build requirements and does not include every component of the submitted build.
+
+[iPhone overview](https://luckisondu.github.io/pockettrainer-web/iphone.html) | [TestFlight instructions](https://luckisondu.github.io/pockettrainer-web/testflight.html) | [Support](https://luckisondu.github.io/pockettrainer-web/support.html) | [Contact](https://luckisondu.github.io/pockettrainer-web/contact.html) | [Privacy](https://luckisondu.github.io/pockettrainer-web/privacy.html) | [All links](https://luckisondu.github.io/pockettrainer-web/links.html)
+
+
+
 Learn how small machine-learning models work by training and testing them on your iPhone. PocketTrainer is a free student project by Luckison Du.
 
 ## Learn by doing
@@ -29,3 +40,7 @@ PocketTrainer is for small educational experiments, rather than medical, safety-
 [Get iPhone support](SUPPORT_IOS.md)  |  [Privacy policy](PRIVACY_IOS.md)
 
 Contact: [luckisondu@gmail.com](mailto:luckisondu@gmail.com)
+
+## Public source and release scope
+
+The public source tree is an earlier educational snapshot and does not reproduce every private component of build 13. Private runtime source and converted model packs are not published here. Historical verification reports keep their original test conditions. See [the release notes](RELEASE_NOTES.md) for the current binary behavior.

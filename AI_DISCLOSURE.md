@@ -44,3 +44,7 @@ Our own research models/adapters, video-generation models, and any photos of peo
 
 Problem choice and the finding that GPU interruptions can silently ruin training on some iPhones; the experimental design; running
 all tests on the real phones; deciding what the results mean. The AI's tests numbers are in `VERIFY.md` with raw files in `results/`.
+
+## October 30, 2026: public release information
+
+OpenAI Codex prepared the following updates at Luckison Du's request: Updated public release status, README, native overview, support/privacy documentation and build-13 release notes using Apple App Store Connect records. The public source remains an earlier educational snapshot; private runtime source and model packs were not published.
